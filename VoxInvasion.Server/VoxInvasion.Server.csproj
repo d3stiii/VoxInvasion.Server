@@ -8,6 +8,7 @@
 
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
       <PackageReference Include="NetCoreServer" Version="8.0.7" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="protobuf-net" Version="3.2.30" />
