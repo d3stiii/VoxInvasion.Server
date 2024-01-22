@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxInvasion.Server.Cli", "VoxInvasion.Server.Cli\VoxInvasion.Server.Cli.csproj", "{A6573583-96BA-431A-981C-0FD7C0580B66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxInvasion.Server", "VoxInvasion.Server\VoxInvasion.Server.csproj", "{A89CB9F2-3B85-44ED-9769-15C04086D50D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{A6573583-96BA-431A-981C-0FD7C0580B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6573583-96BA-431A-981C-0FD7C0580B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6573583-96BA-431A-981C-0FD7C0580B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A89CB9F2-3B85-44ED-9769-15C04086D50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89CB9F2-3B85-44ED-9769-15C04086D50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89CB9F2-3B85-44ED-9769-15C04086D50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89CB9F2-3B85-44ED-9769-15C04086D50D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
