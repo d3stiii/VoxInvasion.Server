@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Serilog.Events;
-using VoxInvasion.Server.Servers;
-using VoxInvasion.Server.Utilities;
+using VoxInvasion.Server.Core.Servers;
+using VoxInvasion.Server.Core.Utilities;
 
 namespace VoxInvasion.Server.Cli;
 

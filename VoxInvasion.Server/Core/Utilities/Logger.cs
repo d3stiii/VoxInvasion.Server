@@ -6,7 +6,7 @@ using Serilog.Events;
 using Serilog.Templates;
 using Serilog.Templates.Themes;
 
-namespace VoxInvasion.Server.Utilities;
+namespace VoxInvasion.Server.Core.Utilities;
 
 public static class Logger
 {
