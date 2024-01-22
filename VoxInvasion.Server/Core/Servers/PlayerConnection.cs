@@ -31,6 +31,7 @@ public class PlayerConnection(TcpServer server, PacketHandlersProvider packetHan
     protected override void OnReceived(byte[] buffer, long offset, long size)
     {
         var packet = buffer.Deserialize(offset, size);
+        Logger.Verbose($"Incoming packet: {packet.Id}");
         var handler = packetHandlersProvider.GetHandler(packet.Id);
         if (handler == null)
         {
