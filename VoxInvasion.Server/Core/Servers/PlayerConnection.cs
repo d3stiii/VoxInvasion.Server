@@ -12,6 +12,7 @@ public class PlayerConnection(TcpServer server, PacketHandlersProvider packetHan
     : TcpSession(server)
 {
     private static readonly ILogger Logger = Log.Logger.ForType(typeof(PlayerConnection));
+    private IPEndPoint _socket = null!;
 
     public void SendAsync(IPacket packet)
     {
@@ -22,7 +23,8 @@ public class PlayerConnection(TcpServer server, PacketHandlersProvider packetHan
 
     protected override void OnConnected()
     {
-        Logger.Information($"({(IPEndPoint)Socket.RemoteEndPoint!} player connection with id {Id} established)");
+        _socket = (IPEndPoint)Socket.RemoteEndPoint!;
+        Logger.Information($"({_socket} player connection with id {Id} established)");
         SendAsync(new WelcomePacket { Message = "VoxInvasion へようこそ" });
     }
 
@@ -41,7 +43,7 @@ public class PlayerConnection(TcpServer server, PacketHandlersProvider packetHan
 
     protected override void OnDisconnected()
     {
-        Logger.Information($"({(IPEndPoint)Socket.RemoteEndPoint!} player connection with id {Id} ended)");
+        Logger.Information($"({_socket} player connection with id {Id} closed)");
     }
 
     protected override void OnError(SocketError error) =>
