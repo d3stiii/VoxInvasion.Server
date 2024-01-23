@@ -1,12 +1,20 @@
-﻿using Serilog;
+using ProtoBuf;
+using Serilog;
 using VoxInvasion.Server.Core.Database.Models;
-using VoxInvasion.Server.Core.Protocol.Packets;
-using VoxInvasion.Server.Core.Protocol.Packets.Authentication.Login;
-using VoxInvasion.Server.Core.Protocol.Packets.Authentication.Registration;
+using VoxInvasion.Server.Core.Packets.Entrance.Login;
 using VoxInvasion.Server.Core.Servers;
 using VoxInvasion.Server.Core.Utilities;
 
-namespace VoxInvasion.Server.Core.Protocol.Handlers.Authentication.Registration;
+namespace VoxInvasion.Server.Core.Packets.Entrance.Registration;
+
+[ProtoContract]
+public class RegisterRequestPacket : IPacket
+{
+    [ProtoMember(1)] public PacketId Id { get; } = PacketId.RegisterRequest;
+    [ProtoMember(2)] public string Username { get; init; } = null!;
+    [ProtoMember(3)] public string Email { get; init; } = null!;
+    [ProtoMember(4)] public string Password { get; init; } = null!;
+}
 
 public class RegisterRequestHandler : IPacketHandler
 {

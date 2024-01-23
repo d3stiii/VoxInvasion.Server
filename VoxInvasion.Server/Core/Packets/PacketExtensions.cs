@@ -2,7 +2,7 @@ using ProtoBuf;
 using Serilog;
 using VoxInvasion.Server.Core.Utilities;
 
-namespace VoxInvasion.Server.Core.Protocol.Packets;
+namespace VoxInvasion.Server.Core.Packets;
 
 public static class PacketExtensions
 {

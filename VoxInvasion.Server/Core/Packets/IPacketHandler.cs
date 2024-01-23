@@ -1,7 +1,6 @@
-using VoxInvasion.Server.Core.Protocol.Packets;
 using VoxInvasion.Server.Core.Servers;
 
-namespace VoxInvasion.Server.Core.Protocol.Handlers;
+namespace VoxInvasion.Server.Core.Packets;
 
 public interface IPacketHandler
 {

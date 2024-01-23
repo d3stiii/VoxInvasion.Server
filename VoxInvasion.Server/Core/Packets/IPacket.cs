@@ -1,9 +1,10 @@
 using ProtoBuf;
-using VoxInvasion.Server.Core.Protocol.Packets.Authentication.Login;
-using VoxInvasion.Server.Core.Protocol.Packets.Authentication.Registration;
-using VoxInvasion.Server.Core.Protocol.Packets.Common;
+using VoxInvasion.Server.Core.Packets.Entrance;
+using VoxInvasion.Server.Core.Packets.Entrance.Login;
+using VoxInvasion.Server.Core.Packets.Entrance.Registration;
+using VoxInvasion.Server.Core.Packets.Ping;
 
-namespace VoxInvasion.Server.Core.Protocol.Packets;
+namespace VoxInvasion.Server.Core.Packets;
 
 [ProtoContract]
 [ProtoInclude(100, typeof(WelcomePacket))]

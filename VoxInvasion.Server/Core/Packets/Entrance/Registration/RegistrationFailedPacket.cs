@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace VoxInvasion.Server.Core.Protocol.Packets.Authentication.Registration;
+namespace VoxInvasion.Server.Core.Packets.Entrance.Registration;
 
 [ProtoContract]
 public class RegistrationFailedPacket : IPacket

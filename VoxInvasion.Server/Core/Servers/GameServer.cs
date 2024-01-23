@@ -3,8 +3,8 @@ using System.Net.Sockets;
 using NetCoreServer;
 using Serilog;
 using VoxInvasion.Server.Core.Database;
-using VoxInvasion.Server.Core.Protocol.Packets;
-using VoxInvasion.Server.Core.Protocol.Packets.Common;
+using VoxInvasion.Server.Core.Packets;
+using VoxInvasion.Server.Core.Packets.Ping;
 using VoxInvasion.Server.Core.Utilities;
 
 namespace VoxInvasion.Server.Core.Servers;

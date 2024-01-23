@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace VoxInvasion.Server.Core.Protocol.Packets.Common;
+namespace VoxInvasion.Server.Core.Packets.Ping;
 
 [ProtoContract]
 public class PingPacket : IPacket

@@ -1,9 +1,8 @@
 using System.Reflection;
 using Serilog;
-using VoxInvasion.Server.Core.Protocol.Handlers;
 using VoxInvasion.Server.Core.Utilities;
 
-namespace VoxInvasion.Server.Core.Protocol.Packets;
+namespace VoxInvasion.Server.Core.Packets;
 
 public class PacketHandlersProvider
 {
