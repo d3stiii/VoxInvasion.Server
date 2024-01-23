@@ -14,6 +14,8 @@ namespace VoxInvasion.Server.Core.Packets;
 [ProtoInclude(500, typeof(RegistrationFailedPacket))]
 [ProtoInclude(600, typeof(LoginSuccessPacket))]
 [ProtoInclude(700, typeof(LoginFailedPacket))]
+[ProtoInclude(800, typeof(PongPacket))]
+[ProtoInclude(900, typeof(PingResultPacket))]
 public interface IPacket
 {
     PacketId Id { get; }

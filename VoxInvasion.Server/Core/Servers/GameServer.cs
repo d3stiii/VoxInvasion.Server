@@ -35,7 +35,7 @@ public class GameServer(IPAddress host, ushort port) : TcpServer(host, port)
             {
                 try
                 {
-                    connection.SendAsync(new PingPacket { CurrentTime = DateTimeOffset.UtcNow });
+                    connection.SendAsync(new PingPacket { UnixMilliseconds = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() });
                 }
                 catch (Exception e)
                 {

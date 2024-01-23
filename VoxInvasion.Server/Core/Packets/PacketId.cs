@@ -8,5 +8,7 @@ public enum PacketId
     RegisterRequest,
     RegistrationFailed,
     LoginSuccess,
-    LoginFailed
+    LoginFailed,
+    Pong,
+    PingResult
 }
