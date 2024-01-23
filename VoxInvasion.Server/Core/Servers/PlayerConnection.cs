@@ -2,17 +2,23 @@ using System.Net;
 using System.Net.Sockets;
 using NetCoreServer;
 using Serilog;
+using VoxInvasion.Server.Core.Database.Models;
 using VoxInvasion.Server.Core.Protocol.Packets;
 using VoxInvasion.Server.Core.Protocol.Packets.Common;
 using VoxInvasion.Server.Core.Utilities;
 
 namespace VoxInvasion.Server.Core.Servers;
 
-public class PlayerConnection(TcpServer server, PacketHandlersProvider packetHandlersProvider)
+public class PlayerConnection(GameServer server, PacketHandlersProvider packetHandlersProvider)
     : TcpSession(server)
 {
     private static readonly ILogger Logger = Log.Logger.ForType(typeof(PlayerConnection));
     private IPEndPoint _socket = null!;
+
+    public bool IsSocketConnected => IsConnected && !IsDisposed && !IsSocketDisposed;
+    public GameServer ConnectedServer { get; } = server;
+    public Player PlayerData { get; set; } = null!;
+    public bool LoggedIn => IsSocketConnected && PlayerData != null!;
 
     public void SendAsync(IPacket packet)
     {
