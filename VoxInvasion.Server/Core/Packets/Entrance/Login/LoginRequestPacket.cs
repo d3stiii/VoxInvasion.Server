@@ -34,6 +34,7 @@ public class LoginRequestHandler : IPacketHandler
 
         connection.PlayerData = playerData;
         connection.SendAsync(new LoginSuccessPacket());
-        Logger.Information($"{playerData.Username} authed successfully");
+        connection.Logger = connection.Logger.WithPlayer(connection);
+        connection.Logger.Information($"Logged in");
     }
 }

@@ -5,6 +5,7 @@ using Serilog.Core;
 using Serilog.Events;
 using Serilog.Templates;
 using Serilog.Templates.Themes;
+using VoxInvasion.Server.Core.Servers;
 
 namespace VoxInvasion.Server.Core.Utilities;
 
@@ -35,7 +36,7 @@ public static class Logger
     public static void Initialize(LogEventLevel eventLevel)
     {
         const string template =
-            "[{@t:HH:mm:ss.fff}] [{@l}] [{SourceContext}] {#if SessionEndpoint is not null}[{SessionEndpoint}] {#end}{@m:lj}\n{@x}";
+            "[{@t:HH:mm:ss.fff}] [{@l}] [{SourceContext}] {#if SessionEndpoint is not null}[{SessionEndpoint}] {#end}{#if Username is not null}[{Username}] {#end}{@m:lj}\n{@x}";
 
         Serilog.Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
@@ -55,6 +56,9 @@ public static class Logger
     public static ILogger ForType(this ILogger logger, Type type) =>
         logger.ForContext(Constants.SourceContextPropertyName, type.Name);
 
-    public static ILogger WithPlayer(this ILogger logger, TcpSession session) =>
+    public static ILogger WithConnection(this ILogger logger, TcpSession session) =>
         logger.ForContext("SessionEndpoint", session.Socket.RemoteEndPoint as IPEndPoint);
+
+    public static ILogger WithPlayer(this ILogger logger, PlayerConnection player) =>
+        logger.WithConnection(player).ForContext("Username", player.PlayerData.Username);
 }

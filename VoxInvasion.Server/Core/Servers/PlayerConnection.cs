@@ -12,8 +12,7 @@ namespace VoxInvasion.Server.Core.Servers;
 public class PlayerConnection(GameServer server, PacketHandlersProvider packetHandlersProvider)
     : TcpSession(server)
 {
-    private static readonly ILogger Logger = Log.Logger.ForType(typeof(PlayerConnection));
-    private IPEndPoint _socket = null!;
+    public ILogger Logger = Log.Logger.ForType(typeof(PlayerConnection));
 
     public bool IsSocketConnected => IsConnected && !IsDisposed && !IsSocketDisposed;
     public GameServer ConnectedServer { get; } = server;
@@ -29,8 +28,8 @@ public class PlayerConnection(GameServer server, PacketHandlersProvider packetHa
 
     protected override void OnConnected()
     {
-        _socket = (IPEndPoint)Socket.RemoteEndPoint!;
-        Logger.Information($"({_socket} player connection with id {Id} established)");
+        Logger = Logger.WithConnection(this);
+        Logger.Information($"Connection with id {Id} established");
         SendAsync(new WelcomePacket { Message = "VoxInvasion へようこそ" });
     }
 
@@ -48,10 +47,8 @@ public class PlayerConnection(GameServer server, PacketHandlersProvider packetHa
         handler.Execute(packet, this);
     }
 
-    protected override void OnDisconnected()
-    {
-        Logger.Information($"({_socket} player connection with id {Id} closed)");
-    }
+    protected override void OnDisconnected() =>
+        Logger.Information($"Connection with id {Id} closed");
 
     protected override void OnError(SocketError error) =>
         Logger.Error("An error has occurred with code {Error}", error);

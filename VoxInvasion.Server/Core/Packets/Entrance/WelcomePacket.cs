@@ -16,6 +16,6 @@ public class WelcomeHandler : IPacketHandler
 
     public void Execute(IPacket packet, PlayerConnection connection)
     {
-        Console.WriteLine(((WelcomePacket)packet).Message);
+        connection.Logger.Information($"Message from client: {((WelcomePacket)packet).Message}");
     }
 }
