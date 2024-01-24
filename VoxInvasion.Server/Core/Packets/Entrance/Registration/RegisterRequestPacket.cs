@@ -45,6 +45,7 @@ public class RegisterRequestHandler : IPacketHandler
         connection.ConnectedServer.Context.SaveChanges();
 
         connection.SendAsync(new LoginSuccessPacket());
-        Logger.Information($"{connection.PlayerData.Username} registered successfully");
+        connection.Logger = connection.Logger.WithPlayer(connection);
+        connection.Logger.Information($"Player registered successfully");
     }
 }
