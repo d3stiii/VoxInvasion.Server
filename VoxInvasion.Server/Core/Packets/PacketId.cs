@@ -10,5 +10,9 @@ public enum PacketId
     LoginSuccess,
     LoginFailed,
     Pong,
-    PingResult
+    PingResult,
+    CheckEmail,
+    EmailInvalid,
+    EmailValid,
+    EmailOccupied
 }

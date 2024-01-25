@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Sockets;
 using NetCoreServer;
 using Serilog;
@@ -21,7 +20,7 @@ public class PlayerConnection(GameServer server, PacketHandlersProvider packetHa
 
     public void SendAsync(IPacket packet)
     {
-        var buffer = packet.Serialize();
+        byte[] buffer = packet.Serialize();
         Logger.Verbose($"Outgoing packet: {packet.Id}");
         base.SendAsync(buffer);
     }
@@ -35,7 +34,7 @@ public class PlayerConnection(GameServer server, PacketHandlersProvider packetHa
 
     protected override void OnReceived(byte[] buffer, long offset, long size)
     {
-        var packet = buffer.Deserialize(offset, size);
+        IPacket packet = buffer.Deserialize(offset, size);
         Logger.Verbose($"Incoming packet: {packet.Id}");
         var handler = packetHandlersProvider.GetHandler(packet.Id);
         if (handler == null)
