@@ -26,7 +26,8 @@ public class RegisterRequestHandler : IPacketHandler
         var request = (RegisterRequestPacket)packet;
 
         var dbContext = connection.ConnectedServer.Context;
-        if (dbContext.Players.Any(player => player.Username == request.Username))
+        if (dbContext.Players.Any(player => player.Username == request.Username) ||
+            dbContext.Players.Any(player => player.Email == request.Email))
         {
             connection.SendAsync(new RegistrationFailedPacket());
             return;
