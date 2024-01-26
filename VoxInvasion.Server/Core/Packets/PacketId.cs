@@ -14,5 +14,8 @@ public enum PacketId
     CheckEmail,
     EmailInvalid,
     EmailValid,
-    EmailOccupied
+    EmailOccupied,
+    CheckUsername,
+    UsernameOccupied,
+    UsernameValid
 }

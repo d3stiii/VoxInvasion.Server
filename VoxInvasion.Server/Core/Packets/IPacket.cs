@@ -21,6 +21,9 @@ namespace VoxInvasion.Server.Core.Packets;
 [ProtoInclude(1100, typeof(EmailInvalidPacket))]
 [ProtoInclude(1200, typeof(EmailOccupiedPacket))]
 [ProtoInclude(1300, typeof(EmailValidPacket))]
+[ProtoInclude(1400, typeof(CheckUsernamePacket))]
+[ProtoInclude(1500, typeof(UsernameOccupiedPacket))]
+[ProtoInclude(1600, typeof(UsernameValidPacket))]
 public interface IPacket
 {
     PacketId Id { get; }
