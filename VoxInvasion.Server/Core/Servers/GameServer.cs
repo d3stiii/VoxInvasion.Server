@@ -13,9 +13,10 @@ public class GameServer(IPAddress host, ushort port) : TcpServer(host, port)
 {
     private static readonly ILogger Logger = Log.Logger.ForType(typeof(GameServer));
     private readonly PacketHandlersProvider _packetHandlersProvider = new();
+    private readonly List<PlayerConnection> _connections = new();
 
+    public IEnumerable<PlayerConnection> Connections => _connections;
     public DatabaseContext Context { get; } = new();
-    public List<PlayerConnection> Connections { get; } = new();
 
     protected override void OnStarted()
     {
@@ -31,11 +32,12 @@ public class GameServer(IPAddress host, ushort port) : TcpServer(host, port)
         {
             if (!IsStarted) return;
 
-            foreach (var connection in Connections.ToArray())
+            foreach (var connection in _connections.ToArray())
             {
                 try
                 {
-                    connection.SendAsync(new PingPacket { UnixMilliseconds = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() });
+                    connection.SendAsync(new PingPacket
+                        { UnixMilliseconds = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() });
                 }
                 catch (Exception e)
                 {
@@ -49,7 +51,7 @@ public class GameServer(IPAddress host, ushort port) : TcpServer(host, port)
 
     protected override void OnStopped() => _packetHandlersProvider.Clear();
     protected override TcpSession CreateSession() => new PlayerConnection(this, _packetHandlersProvider);
-    protected override void OnConnected(TcpSession session) => Connections.Add((PlayerConnection)session);
-    protected override void OnDisconnected(TcpSession session) => Connections.Remove((PlayerConnection)session);
+    protected override void OnConnected(TcpSession session) => _connections.Add((PlayerConnection)session);
+    protected override void OnDisconnected(TcpSession session) => _connections.Remove((PlayerConnection)session);
     protected override void OnError(SocketError error) => Logger.Error($"Game server caught an error: {error}");
 }
