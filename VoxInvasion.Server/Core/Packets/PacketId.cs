@@ -9,6 +9,7 @@ public enum PacketId
     RegistrationFailed,
     LoginSuccess,
     LoginFailed,
+    LoginFromOtherConnection,
     Pong,
     PingResult,
     CheckEmail,

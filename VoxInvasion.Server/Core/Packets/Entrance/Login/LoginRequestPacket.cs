@@ -23,6 +23,7 @@ public class LoginRequestHandler : IPacketHandler
     {
         if (connection.LoggedIn) return;
         var request = (LoginRequestPacket)packet;
+
         var dbContext = connection.ConnectedServer.Context;
         Player? playerData = dbContext.Players.SingleOrDefault(player =>
             player.Username == request.Username && player.Password == request.Password);
@@ -30,6 +31,15 @@ public class LoginRequestHandler : IPacketHandler
         {
             connection.SendAsync(new LoginFailedPacket());
             return;
+        }
+
+        var playerFromOtherConnection = connection.ConnectedServer.Connections.SingleOrDefault(otherConnection =>
+            otherConnection.LoggedIn && otherConnection.PlayerData.Username == request.Username);
+        if (playerFromOtherConnection != null)
+        {
+            playerFromOtherConnection.Logger.Information("Logged in to this account from other connection. Disconnecting...");
+            playerFromOtherConnection.SendAsync(new LoginFromOtherConnectionPacket());
+            playerFromOtherConnection.Disconnect();
         }
 
         connection.PlayerData = playerData;
